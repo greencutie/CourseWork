@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--<base href="content/">  -->
+    <meta charset="UTF-8">
+    <title>Aho-Korasik</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <script type="text/javascript" src="scripts.js" ></script>
+</head>
+
+<body>
+
+	<table style="min-width: 1200px; width: 100%; height: 100%; padding-left: 15px; padding-right: 15px; border-collapse: collapse; table-layout: fixed;"> <!-- border-spacing: 25px 10px;  -->
+		<tr>
+			<th colspan="3">
+				<h1>Aho-Korasik algo</h1>
+			</th>
+		</tr>
+		<tr>
+			<td style="width: 30%; vertical-align: top;">
+				<h2>Искомые подстроки</h3>
+			</td>
+			<td colspan="2">
+				<h2>Строка для поиска</h3>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 30%; vertical-align: bottom;">
+				<div id="substrings" class="scrolbars" style="font-size: 2.5em; border-width: 1px; border-style: solid;">
+					<!-- <div>aba</div>
+					<div>cab</div>
+					<div>bac</div>
+					<div>abacab</div> -->
+				</div>
+			</td>
+			<td colspan="2" style="vertical-align: bottom;">
+				<div  id="string" class="scrolbars" style="font-size: 2.5em;  border-width: 1px; border-style: solid;">
+					<!-- abacabadaba -->
+				</div>
+			</td>
+		</tr>
+	<!-- </table>
+	<hr style="width:100%;text-align:left;margin-left:0">
+	<table style="width: 100%; height: 100%; padding-left: 15px; padding-right: 15px; border-collapse: separate; border-spacing: 25px 10px; table-layout: fixed;"> -->
+		<tr id="inputs" style="display: ;">
+			<td colspan="3" id="ressubstrtd" style="display: ; width: 35%;" >
+				<h3>
+					Введите искомые подстроки, каждую на новой строке
+				</h3>
+				<textarea name="ressubstr" id="ressubstr" value="" style="width: 100%"></textarea>
+				<br/>
+				<button onclick="fillACB()">Хороший случай</button>
+				<button onclick="fillACM()">Средний случай</button>
+				<button onclick="fillACW()">Плохой случай</button>
+				<br/>
+				<button onclick="fillAC()">Следующий шаг</button>
+			</td>
+			<td colspan="3" id="resstrtd" style="display: none; width: 35%;">
+				<h3>
+					Введите строку для поиска подстрок
+				</h3>
+				<textarea name="resstr" id="resstr" value="" style="width: 100%"></textarea>
+				<br/>
+				<button onclick="fillSB()">Хороший случай</button>
+				<button onclick="fillSM()">Средний случай</button>
+				<button onclick="fillSW()">Плохой случай</button>
+				<br/>
+				<button onclick="changeSS()">Предыдущий шаг</button>
+				<button onclick="startVis()">Перейти к визуализации</button>
+			</td>
+		</tr>
+		<tr id="controls_and_tree" style="display: none">
+			<td style="width: 30%; border-right-style: solid; border-top-style: solid;border-bottom-style: solid;">
+				<div class="scrolbars">
+					<table id="tree" align="center" style="width: 80%; border-spacing: 10px; border-width: 1px;">
+						
+					</table>
+				</div>
+			</td>
+			<td id="algoFind" style="width: 35%; vertical-align: top; border-left-style: solid;
+border-top-style: solid; border-bottom-style: solid;font-size: x-large;">
+				<div>Aho_Korasik(substr,str):</div>
+				<div>BuildTreeFromStrings(substr)</div>
+				<br/>
+				<div>v = 0</div>
+				<div>for (i in str):</div>
+				<div>&nbsp&nbsp v = go(v, nextSymb)</div>
+				<div>&nbsp&nbsp pv = v</div>
+				<div>&nbsp&nbsp while(pv != root):</div>
+				<div>&nbsp&nbsp&nbsp&nbsp if(checkIsList(pv)):</div>
+				<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp addRes(pv)</div>
+				<div>&nbsp&nbsp&nbsp&nbsp pv = getLink(pv)</div>
+			</td>
+			<td id="algoFunc" style="vertical-align: top; border-top-style: solid;border-bottom-style: solid;font-size: x-large;">
+				<div>go(v,c):</div>
+				<div>&nbsp&nbsp if(v.next[c] != NULL):</div>
+				<div>&nbsp&nbsp&nbsp&nbsp return v.next[c]</div>
+				<div>&nbsp&nbsp if(v == root):</div>
+				<div>&nbsp&nbsp&nbsp&nbsp return root</div>
+				<div>&nbsp&nbsp return go(getLink(v),c)</div>
+				<br/>
+				<div>getLink(v):</div>
+				<div>&nbsp&nbsp if(v.link == NULL):</div>
+				<div>&nbsp&nbsp&nbsp&nbsp if(v == root):</div>
+				<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp v.link = root</div>
+				<div>&nbsp&nbsp&nbsp&nbsp else:</div>
+				<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp v.link = go(getLink(v.parent),v.symb)</div>
+				<div>&nbsp&nbsp return v.link</div>
+				<br/>
+			</td>
+		</tr>
+		<tr id="visualizing" style="display: none">
+			<td style="vertical-align: top; border-collapse: 15px;">
+				<div id="progressbar">
+					<div></div>
+				</div>
+				<div id="progress" style="text-align: center;"></div>
+				<br/>
+				<div style="display: table; align-items: center; width: 100%;">
+					<button style="display: table-cell; width: 50%;" onclick="previousState()">Предыдущее действие</button>
+					<button style="display: table-cell; width: 50%;" onclick="nextState()">Следующее действие</button>
+				</div>
+				<div style="display: table; align-items: center; width: 100%;">
+					<button style="display: table-cell; width: 50%;" onclick="changeS(); changeSS()">Изменить искомые подстроки</button>
+					<button style="display: table-cell; width: 50%;" onclick="changeS()">Изменить строку для поиска</button>
+				</div>
+			</td>
+			<td colspan="2" style="vertical-align: top; font-size: x-large;">
+				<h3>
+					Текущая операция
+				</h3>
+				<div id="operation">
+					
+				</div>
+			</td>
+		</tr>
+
+	</table>
+
+
+</body>

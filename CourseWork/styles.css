@@ -1,0 +1,78 @@
+body{
+	border-style: solid;
+	margin: 0 0 0 0;
+	border-width: 26px;
+	background-color: #eee;
+}
+
+td{
+	padding: 10px;
+}
+
+#progressbar {
+  background-color: black;
+  border-radius: 13px;
+  /* (height of inner div) / 2 + padding */
+  padding: 3px;
+}
+
+#progressbar>div {
+  background-color: orange;
+  /* Adjust with JavaScript */
+  border-radius: 8px;
+  height: 20px;
+  width: 0%;
+}
+
+/*div > ul:hover{
+  overflow-y: auto;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
+	-moz-overflow-scrolling: touch;
+	-ms-overflow-scrolling: touch;
+	-o-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+}
+div > ul::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 7px;
+}
+div > ul::-webkit-scrollbar-thumb {
+	border-radius: 2px;
+	background-color: rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 0 1px rgba(255,255,255,0.5);
+}*/
+
+.scrolbars{
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+    -moz-overflow-scrolling: touch;
+    -ms-overflow-scrolling: touch;
+    -o-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+}
+
+button{
+	padding: 10px 35px 10px 35px;
+	font-size: 1.2em;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: #14af21;
+    background-color: #068a11;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #05800d;
+}
+
+button:active{
+    box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+textarea{
+	height: 100px;
+	background-color: #ffffff4d;
+}
